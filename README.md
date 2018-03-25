@@ -1,4 +1,4 @@
-# Dobrodošli!
+# Marvel projekat - odaberi svog heroja!
 
 ### SPECIFIKACIJA TEHNOLOGIJA
 
@@ -37,7 +37,7 @@
 ### INSTRUKCIJE ZA POKRETANJE PROJEKTA
 
 ```
-1. git clone https://github.com/jovanovicmilos/router.git
+1. git clone https://github.com/jovanovicmilos/marvel.git
 
 2. Nakon skidanja projekta trebate instalirati neophodne tehnologije za 
 pokretanje projekta u lokalu (navede su gore ispod naslova "Specifikacija tehnologija")
