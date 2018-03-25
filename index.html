@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="marvel">
+<head>
+    <title>Marvel | Choose your hero</title>
+    <link rel="icon" type="image/png" href="images/icon.png" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/css?family=Marvel:400,400i,700,700i" rel="stylesheet">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- loading bar -->
+    <link rel="stylesheet" href="assets/bower_components/angular-loading-bar/src/loading-bar.css" />
+    <!-- css -->
+    <link rel="stylesheet" href="dist/css/style.css"/>
+</head>
+<body ng-controller="marvelController">
+    <div class="loader" ng-hide="loadingflag"></div>
+    <search-modal></search-modal>
+    <div class="container-fluid" id="main" ng-show="loadingflag">
+        <div class="error-msg" ng-if="errormsg">Your don't have hero in your team! Choose someone.</div>
+        <div class="search-badge"><span class="glyphicon glyphicon-arrow-left"></span> SEARCH</div>
+        <div class="marvel-badge ng-cloak" ng-show="bookmark">MARVEL</div>
+        <div class="marvel-badge ng-cloak" ng-hide="bookmark" ng-style="{'left':'-10px'}">YOUR HEROES</div>
+        <div>
+            <button type="button" class="btn btn-primary" id="search-btn" title="Search" ng-click="searchModal()">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+            <button type="button" class="btn btn-primary" id="myheroes-btn" title="{{bookmark ? 'My heroes' : 'All heroes'}}" ng-click="toggleHeroList(!bookmark)">
+                <span class="glyphicon glyphicon-{{bookmark ? 'user' : 'list-alt'}}"></span>
+            </button>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12 box" ng-repeat="h in heroes.results" ng-style="{'background': 'url({{h.thumbnail.path + '.' +  h.thumbnail.extension}}) center center no-repeat','background-size':'cover'}" ng-class="{'ischeckclass': existID(h.id) == true || bookmark == false}">
+                <h3 title="{{h.name.length > 5 ? h.name : '' }}">{{ h.name | limitTo: 30}}<span ng-if="h.name.length > 30">...</span></h3>
+                <div class="bookmark" ng-show="bookmark && existID(h.id)" ng-click="unCheckHero(h, heroes.results)">
+                    <p ng-show="existID(h.id)">Good choice <span class="glyphicon glyphicon-ok" ng-show="existID(h.id)"></span></p>
+                </div>
+                <div class="bookmark" ng-show="bookmark && !existID(h.id)" ng-click="toggle(h, selected)">
+                    <p ng-hide="existID(h.id)">Choose me <span class="glyphicon glyphicon-bookmark" ng-hide="existID(h.id)"></span></p>
+                </div>
+                <div class="bookmark" ng-hide="bookmark" ng-click="unCheckHero(h,heroes.results)">
+                    <p>Remove from your team <span class="glyphicon glyphicon-trash"></span></p>
+                </div>
+            </div>
+        </div>
+        <div id="pagination" ng-show="bookmark">
+            <ul uib-pagination total-items="heroes.total" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-change="getHeroes(true)"></ul>
+        </div>
+    </div>
+    <!-- bootstrap / jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const body = $('body').innerHeight()
+            if ($(window).innerWidth() < 991) {
+                $('.box').css({ 'height': body / 2 });
+                $('.bookmark').css({ 'top': '-70px', 'left': '-14px', 'opacity': 1 });
+            } else {
+                $('.box').css({ 'height': body / 3 })
+            }
+        });
+    </script>
+    <!--AngularJs -->
+    <script src="assets/bower_components/angular/angular.min.js"></script>
+    <script src="assets/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="assets/bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="assets/bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="assets/bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="assets/bower_components/angular-loading-bar/src/loading-bar.js"></script>
+    <!--app-->
+    <script src="dist/app/app.min.js"></script>
+    <!--app/controllers-->
+    <script src="dist/app/controllers/controller.min.js"></script>
+    <!--app/services-->
+    <script src="dist/app/services/services.min.js"></script>
+    <!--app/directives-->
+    <script src="dist/app/directives/directives.min.js"></script>
+    <!--app/config-->
+    <script src="dist/app/config/config.min.js"></script>
+
+</body>
+</html>

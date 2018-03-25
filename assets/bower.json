@@ -1,0 +1,28 @@
+{
+  "name": "bower components",
+  "authors": [
+    "jovanovicmilos <jovanovicmilos925@gmail.com>"
+  ],
+  "description": "bower components for AngularJs autocomplete project",
+  "main": "",
+  "license": "MIT",
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.9",
+    "angular-route": "^1.6.9",
+    "jquery": "^3.3.1",
+    "bootstrap": "^3.3.7",
+    "angular-resource": "^1.6.9",
+    "angular-messages": "^1.6.9",
+    "angular-animate": "^1.6.9",
+    "angular-bootstrap": "^2.5.0",
+    "angular-loading-bar": "^0.9.0"
+  }
+}
